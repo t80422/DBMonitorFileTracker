@@ -34,6 +34,8 @@ namespace DBMonitorFileTracker
             this.tmrMain = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.txtFilePath = new System.Windows.Forms.TextBox();
+            this.txtURL = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnStart
@@ -42,8 +44,8 @@ namespace DBMonitorFileTracker
             this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnStart.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnStart.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnStart.Location = new System.Drawing.Point(170, 44);
-            this.btnStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStart.Location = new System.Drawing.Point(174, 90);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(4);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(80, 40);
             this.btnStart.TabIndex = 0;
@@ -73,20 +75,38 @@ namespace DBMonitorFileTracker
             this.txtFilePath.Size = new System.Drawing.Size(300, 27);
             this.txtFilePath.TabIndex = 2;
             // 
+            // txtURL
+            // 
+            this.txtURL.Location = new System.Drawing.Point(122, 56);
+            this.txtURL.Name = "txtURL";
+            this.txtURL.Size = new System.Drawing.Size(300, 27);
+            this.txtURL.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(11, 46);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(104, 37);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "資料庫檢查回報URL";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 94);
+            this.ClientSize = new System.Drawing.Size(437, 142);
+            this.Controls.Add(this.txtURL);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.txtFilePath);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnStart);
             this.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "frmMain";
-            this.Padding = new System.Windows.Forms.Padding(7, 7, 7, 7);
-            this.Text = "資料庫、輸出檔案 監控系統 v0.1.0";
+            this.Padding = new System.Windows.Forms.Padding(7);
+            this.Text = "資料庫、輸出檔案 監控系統 v1.0.0";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -99,6 +119,8 @@ namespace DBMonitorFileTracker
         private System.Windows.Forms.Timer tmrMain;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtFilePath;
+        private System.Windows.Forms.TextBox txtURL;
+        private System.Windows.Forms.Label label2;
     }
 }
 

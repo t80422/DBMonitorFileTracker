@@ -18,15 +18,22 @@ namespace DBMonitorFileTracker
         {
             if (!string.IsNullOrEmpty(txtFilePath.Text))
             {
-                tmrMain.Enabled = true;
-                ButtonState(true);
                 SaveFilePath();
             }
             else
             {
                 MessageBox.Show("請輸入輸出檔案位址");
+                return;
             }
 
+            if (btnStart.Text == "啟動")
+            {
+                ButtonState(true);
+            }
+            else if (btnStart.Text == "運作中")
+            {
+                ButtonState(false);
+            }
         }
 
         private void SaveFilePath()
@@ -72,12 +79,25 @@ namespace DBMonitorFileTracker
                         Log.LogMsg(msg);
                     }
                 }
+
+                if (!string.IsNullOrEmpty(txtURL.Text))
+                {
+                    using (MySQL sql = new MySQL())
+                    {
+                        var query = "SELECT sd_time FROM sensor_data ORDER BY sd_id DESC LIMIT 1";
+                        var dt = sql.SelectTable(query);
+                        if (dt != null)
+                        {
+                            DateTime dateTime = Convert.ToDateTime(dt.Rows[0]["sd_time"]);
+                            Program.IMAliveNotify(dateTime, txtURL.Text);
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Log.LogMsg(ex.Message + "\n" + ex.StackTrace);
                 MessageBox.Show(ex.Message);
-                tmrMain.Enabled = false;
                 ButtonState(false);
             }
         }
@@ -127,11 +147,13 @@ namespace DBMonitorFileTracker
             {
                 btnStart.BackColor = Color.LightGreen;
                 btnStart.Text = "運作中";
+                tmrMain.Enabled = true;
             }
             else
             {
                 btnStart.BackColor = Color.LightYellow;
                 btnStart.Text = "啟動";
+                tmrMain.Enabled = false;
             }
         }
     }

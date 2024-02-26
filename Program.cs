@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -34,8 +35,34 @@ namespace DBMonitorFileTracker
 
                 //發送文字編碼
                 var webBrowser = new WebBrowser();
-                var content =  msg;
+                var content = msg;
                 webBrowser.Navigate(apiURL + getdata + System.Net.WebUtility.UrlEncode(content));
+            }
+        }
+
+        public static async void IMAliveNotify(DateTime date,string url)
+        {
+            string datetime = date.ToString("yyyyMMddHHmmss");
+            string apiUrl = $"{url}?datatime={datetime}";
+
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await response.Content.ReadAsStringAsync();
+                    }
+                    else
+                    {
+                        Log.LogMsg($"IMAliveNotify Error: {response.StatusCode}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.LogMsg($"IMAliveNotify Error: {ex.Message}");
             }
         }
 
